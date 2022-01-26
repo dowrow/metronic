@@ -1,0 +1,51 @@
+//
+// Layout Config
+//
+
+// Root font Sizes
+$root-font-size:                                    13px; // Root font size for desktop mode
+$root-font-size-lg:                             	13px; // Root font size for tablet mode
+$root-font-size-md:                             	12px; // Root font size for mobile mode
+
+// Root background Color
+$page-bg:                                           if(isDarkMode(), #56077E, #56077E) !default;
+
+// Root background image
+$page-bg-image:                                     if(isDarkMode(), url('../media/misc/page-bg.jpg'), url('../media/misc/page-bg.jpg'));
+
+// Content  background Color
+$content-bg: 									    if(isDarkMode(), $dark-mode-page-bg-color, #ECEEF7) !default;
+
+// Content Spacing
+$content-spacing: (
+	desktop: 30px, // Padding for desktop mode
+	tablet-and-mobile: 15px // Padding for tablet and mobile modes
+) !default;
+
+// Header
+$header-config: (
+	z-index: 97,
+	sticky-height:(
+		desktop: 70px,
+		tablet-and-mobile: 50px
+	),
+	height: (
+		desktop: 160px,
+		tablet-and-mobile: 70px
+	),
+) !default;
+
+// Toolbar
+$toolbar-config: (
+	bg-color: if(isDarkMode(), #1E1E2D, $white)
+) !default;
+
+// Aside
+$aside-config: (
+	z-index: 101,
+	padding-x: 25px,
+	menu-indention: 0.75rem,
+	width: 265px,
+	bg-color: if(isDarkMode(), #1E1E2D, $white),
+	box-shadow: if(isDarkMode(), none, 0 0 28px 0 rgba(82,63,105,.05)), // Aside box shadow
+) !default;

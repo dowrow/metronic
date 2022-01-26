@@ -1,0 +1,173 @@
+//
+// Header
+//
+
+
+.header {
+	.header-menu-container {
+		background-color: get($header-config, menu-bg-color);
+	}
+
+	// Custom button
+	.btn-nav {
+		@include button-custom-variant(
+			$color: #84859A, $icon-color: #84859A, $border-color: #3D3C51, $bg-color: transparent, 
+			$color-active: $white, $icon-color-active: $white, $border-color-active: #2E2D42, $bg-color-active: #2E2D42
+		);
+	}
+
+	.btn-create {
+		@include button-custom-variant(
+			$color: if(isDarkMode(), $gray-700, $gray-500), $icon-color: if(isDarkMode(), $gray-700, $gray-500), $border-color: #2E2D42, $bg-color: #2E2D42, 
+			$color-active: null, $icon-color-active: null, $border-color-active: null, $bg-color-active: null
+		);
+	}
+
+	// Header menu
+	.header-menu {
+		.menu {
+			// Root links
+			& > .menu-item {
+				// Customize menu link default state       
+				@include menu-link-default-state( $title-color: get($header-config, menu-link-color), $icon-color: get($header-config, menu-link-color), $bullet-color: get($header-config, menu-link-color), $arrow-color: get($header-config, menu-link-color), $bg-color: null, $all-links: false);
+
+				// Customize menu link hover state       
+				@include menu-link-hover-state( $title-color: get($header-config, menu-link-active-color), $icon-color: get($header-config, menu-link-active-color), $bullet-color: get($header-config, menu-link-active-color), $arrow-color: get($header-config, menu-link-active-color), $bg-color: get($header-config, menu-link-active-bg-color), $all-links: false);
+
+				// Customize menu link here state       
+				@include menu-link-here-state( $title-color: get($header-config, menu-link-active-color), $icon-color: get($header-config, menu-link-active-color), $bullet-color: get($header-config, menu-link-active-color), $arrow-color: get($header-config, menu-link-active-color), $bg-color: get($header-config, menu-link-active-bg-color), $all-links: false);
+
+				// Customize menu link show state       
+				@include menu-link-show-state( $title-color: get($header-config, menu-link-active-color), $icon-color: get($header-config, menu-link-active-color), $bullet-color: get($header-config, menu-link-active-color), $arrow-color: get($header-config, menu-link-active-color), $bg-color: get($header-config, menu-link-active-bg-color), $all-links: false);
+
+				// Customize menu link active state       
+				@include menu-link-active-state( $title-color: get($header-config, menu-link-active-color), $icon-color: get($header-config, menu-link-active-color), $bullet-color: get($header-config, menu-link-active-color), $arrow-color: get($header-config, menu-link-active-color), $bg-color: get($header-config, menu-link-active-bg-color), $all-links: false);
+			}
+		}
+	}
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+	.header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		flex-direction: column;
+		z-index: 2;
+		height: get($header-config, height, desktop);
+		transition: left get($aside-config, transition-speed) ease;
+		background-color: get($header-config, bg-color);
+
+		// Header Logo
+		.header-logo {
+			padding: 0;
+			display: flex;
+			align-items: center;		 
+
+			// Logos
+			.logo-default {
+				display: inline-block;
+			}
+
+			.logo-sticky {
+				display: none;
+			}
+		}		
+		
+		// Header menu
+		.header-menu {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+		}		
+
+		// Header search
+		.header-search {
+			form {
+				.svg-icon {
+					@include svg-icon-color($white, true);
+				}
+
+				.form-control {
+					color: $white;
+					border: 1px solid #49485E;
+					@include placeholder(#A1A5B7);
+				}
+			}
+		}
+
+		// Header menu container
+		.separator {
+			width: 100%;
+		}
+
+		// Fixed header & sticky header modes
+		.header-fixed[data-kt-sticky-header="on"] & {
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: get($header-config, z-index);
+			box-shadow: get($header-config, box-shadow);
+			height: get($header-config, sticky-height);			
+			padding: 0;			
+
+			.separator,
+			.header-menu-container {
+				display: none !important;
+			}
+		}
+	}
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+	// Header
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: stretch;
+		height: get($header-config, height, tablet-and-mobile);
+		position: relative;
+		z-index: 3;
+		background-color: get($header-config, bg-color);	
+	
+		.separator,
+		.header-menu-container {
+			display: none !important;
+		}
+
+		// Fixed header and header sticky modes
+		.header-tablet-and-mobile-fixed[data-kt-sticky-header="on"] & {
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: get($header-config, z-index);
+			height: get($header-config, height, tablet-and-mobile);
+			box-shadow: get($header-config, box-shadow);
+
+			// Header Logo
+			.header-logo {
+				// Logos
+				.logo-default {
+					display: none;
+				}
+
+				.logo-sticky {
+					display: inline-block;
+				}
+			}	
+		}	
+	} 	
+
+	// Header menu
+	.header-menu {
+		display: none;
+		z-index: get($header-config, z-index) - 1;
+		padding: 0 !important;
+	}
+}
